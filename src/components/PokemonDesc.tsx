@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useGlocalPokemon } from '../context/FavoriteContext';
 import { Pokemon } from '../interfaces/pokemons';
-import { delelePokemonById, fetchAllPokemons } from '../helpers/fetchPokemons';
+import { delelePokemonById, fetchAllPokemons, fetchPokemon } from '../helpers/fetchPokemons';
+import { IStateForm } from '../interfaces/stateForm';
 
 interface IProps {
     key?: number;
@@ -14,32 +15,6 @@ interface IProps {
 
 export const PokemonDesc:React.FC<IProps> = ({id, hp, attack, deffense, setPokemons }) => {
   const { pokemons } = useGlocalPokemon();
-  const [favoritesPoke, setFavoritesPoke] = useState<Pokemon []>([]);
-
-  useEffect(() => {
-    const favorites = localStorage.getItem('favorites');
-    if(favorites !== null){
-      setFavoritesPoke(JSON.parse(favorites));
-    }
-
-  },[]);
-
-  // const addFavorites = (id: number) => {
-  //   const readValue = localStorage.getItem('favorites');
-
-  //   if(readValue === null){
-  //     const favPokemons = pokemons.filter(poke => poke.id === id);
-  //     console.log(favPokemons);
-  //     localStorage.setItem('favorites', JSON.stringify(favPokemons));
-  //   }else{
-  //     const storagePoke = JSON.parse(readValue);
-  //     const favPokemons = pokemons.filter(poke => poke.id === id);
-  //     let objPoke:MyObj = { id: favPokemons[0].id, img: favPokemons[0].image, name: favPokemons[0].name }
-  //     storagePoke.push(objPoke);
-  //     localStorage.setItem('favorites', JSON.stringify(storagePoke));
-  //   }
-    
-  // }
 
   const deletePokemon = (id:number):void => {
     delelePokemonById(id)
@@ -48,7 +23,8 @@ export const PokemonDesc:React.FC<IProps> = ({id, hp, attack, deffense, setPokem
       fetchAllPokemons().then(pokemons => setPokemons(pokemons))
     })
     
-  }
+  } 
+  
 
   return (
     <React.Fragment>
@@ -72,7 +48,7 @@ export const PokemonDesc:React.FC<IProps> = ({id, hp, attack, deffense, setPokem
             Attack: {attack}
           </b>
         </p>
-        <button aria-label="delete-btn" onClick={() =>deletePokemon(id)}>Delete Pokemon</button>
+        <button className='btn-min' aria-label="delete-btn" onClick={() =>deletePokemon(id)}>Delete</button>
       </div>
     </React.Fragment>
     

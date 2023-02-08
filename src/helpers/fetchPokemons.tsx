@@ -8,7 +8,6 @@ axios.defaults.baseURL = 'https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.
 export const fetchAllPokemons = async ():Promise<Pokemon[]> => {
 
     const idAuthor = 50;
-
     const resp = await axios.get(`/?idAuthor=${idAuthor}`);
     const pokeList = resp.data;
 
@@ -16,29 +15,10 @@ export const fetchAllPokemons = async ():Promise<Pokemon[]> => {
   
 }
 
-export const fetchPokemon = async (name: string): Promise<MiniPokemon> => {
-    const respMini = await axios.get<DetailPokemonResponse>(`/pokemon/${name}`);
-    // console.log(respMini.data)
+export const fetchPokemon = async (id: number) => {
+    const respMini = await axios.get(`/${id}`);
     return respMini.data;
 }
-
-// const miniPokemon = ( pokeList: MiniPokemon[] ): Pokemon[] =>{
-
-//     const pokemonArr: Pokemon[] = pokeList.map( poke => {
-
-//         const pokeArr = poke.url.split('/');
-//         const id = parseInt(pokeArr[6]);
-//         const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ id }.png`;
-                
-//         return {
-//             id: id,
-//             img: img,
-//             name: poke.name
-//         }
-//     })
-
-//     return pokemonArr;
-// }
 
 export const delelePokemonById = async (id:number) => {
     const resp = await axios.delete(`/${id}`);

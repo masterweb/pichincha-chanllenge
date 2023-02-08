@@ -78,8 +78,7 @@ export const PokemonList:React.FC<IProps> = () => {
               ))
             }
             
-          </div> 
-                 
+          </div>                  
         </div>
 
     </React.Fragment>   
