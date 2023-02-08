@@ -1,1 +1,1 @@
-# pichincha-chanlenge
+# pichincha-challenge
